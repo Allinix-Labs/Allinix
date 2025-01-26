@@ -1,0 +1,187 @@
+---
+title: "Input Templating"
+description: The workflow automation system within Allinix
+icon: "wave-sine"
+---
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+import { Card } from "@/components/ui/card";
+
+# Input Templating System
+
+<Callout type="info">
+  Workflow nodes generate output fields at runtime. The templating system
+  manages these dynamic values and their relationships between nodes.
+</Callout>
+
+## Block Definition Model
+
+<Card>
+  <div className="p-6">
+    ### Block Structure
+    ```typescript
+    interface Block {
+      // Input field definitions
+      inputs: {
+        [key: string]: {
+          type: string;
+          required: boolean;
+          description: string;
+        };
+      };
+      
+      // Output field definitions
+      outputs: {
+        [key: string]: {
+          type: string;
+          description: string;
+        };
+      };
+    }
+    ```
+  </div>
+</Card>
+
+## Frontend Implementation
+
+<Card className="mt-6">
+  <div className="p-6">
+    ### Workflow Hierarchy
+    
+    The system uses a graph-based structure to manage node relationships:
+    
+    ```mermaid
+    graph TD
+      A[Parent Node] --> B[Child Node 1]
+      A --> C[Child Node 2]
+      B --> D[Grandchild Node]
+      C --> D
+    ```
+    
+    1. **Field Discovery**
+       - Performs BFS (Breadth-First Search) on ascendant nodes
+       - Collects available output fields
+       - Maps fields to their source nodes
+    
+    2. **Template Generation**
+       - Creates template strings for each field
+       - Format: `{{node_id-value}}`
+       - Example: `{{node-123-output_field}}`
+  </div>
+</Card>
+
+## Backend Processing
+
+<Tabs defaultValue="workflow">
+  <TabsList>
+    <TabsTrigger value="workflow">Workflow Processing</TabsTrigger>
+    <TabsTrigger value="validation">Value Resolution</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="workflow">
+    ### Kafka Workflow Task
+    ```typescript
+    interface WorkflowTask {
+      // Maps template keys to their runtime values
+      templateValues: {
+        [key: string]: any;
+      };
+      
+      // Node execution status
+      nodeStatus: {
+        [nodeId: string]: {
+          status: 'pending' | 'running' | 'completed' | 'failed';
+          output?: any;
+        };
+      };
+    }
+    ```
+  </TabsContent>
+  
+  <TabsContent value="validation">
+    ### Template Resolution Process
+    
+    1. **Value Collection**
+    ```typescript
+    // Example template map
+    const templateValues = {
+      'node-123-output': 'processed value',
+      'node-456-result': 42
+    };
+    ```
+    
+    2. **Template Replacement**
+    ```typescript
+    // Input with templates
+    const input = {
+      field1: '{{node-123-output}}',
+      field2: '{{node-456-result}}'
+    };
+    
+    // Resolved input
+    const resolved = {
+      field1: 'processed value',
+      field2: 42
+    };
+    ```
+  </TabsContent>
+</Tabs>
+
+## Implementation Example
+
+<Card className="mt-6">
+  <div className="p-6 space-y-4">
+    ### Sample Workflow
+    
+    ```typescript
+    // Node definition
+    const textProcessingNode = {
+      id: 'text-processor',
+      inputs: {
+        text: {
+          type: 'string',
+          required: true,
+          description: 'Text to process'
+        }
+      },
+      outputs: {
+        processedText: {
+          type: 'string',
+          description: 'Processed text result'
+        },
+        wordCount: {
+          type: 'number',
+          description: 'Number of words in text'
+        }
+      }
+    };
+    
+    // Template usage
+    const childNode = {
+      inputs: {
+        content: '{{text-processor-processedText}}',
+        metrics: '{{text-processor-wordCount}}'
+      }
+    };
+    ```
+  </div>
+</Card>
+
+<Callout type="warning" className="mt-6">
+  Remember to handle cases where template values might not be available yet, as
+  nodes execute asynchronously.
+</Callout>
+
+## Best Practices
+
+<Card className="mt-6">
+  <div className="p-6">
+    ### Tips for Template Usage 1. **Unique Node IDs** - Ensure node IDs are
+    unique across the workflow - Use descriptive IDs for better debugging 2.
+    **Error Handling** - Validate template syntax before execution - Handle
+    missing or undefined values gracefully 3. **Performance** - Cache template
+    resolution results when possible - Minimize template string parsing
+    operations
+  </div>
+</Card>

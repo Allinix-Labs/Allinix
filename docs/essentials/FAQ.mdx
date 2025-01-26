@@ -1,0 +1,159 @@
+---
+title: FAQ
+description: Get answers to the most frequently asked questions about Allinix
+icon: "question"
+---
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+import { Card } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+# Frequently Asked Questions
+
+<Callout type="info">
+  Can't find what you're looking for? Connect with our team on
+  [Discord](https://discord.gg/jdSBAnmdnY) or
+  [GitHub](https://github.com/allinix/Allinix).
+</Callout>
+
+## Agent-Related Questions
+
+<Accordion type="single" collapsible className="w-full">
+  <AccordionItem value="file-generation">
+    <AccordionTrigger>
+      Allinix said it made a file / database / script, where can I find it?
+    </AccordionTrigger>
+    <AccordionContent>
+      Currently, Allinix cannot generate physical outputs. However, this feature is in active development. Check our [roadmap](/essentials/roadmap) for updates on this functionality.
+    </AccordionContent>
+  </AccordionItem>
+
+{" "}
+
+<AccordionItem value="email-capability">
+  <AccordionTrigger>Did Allinix really email 100 people?</AccordionTrigger>
+  <AccordionContent>
+    Not yet! Email functionality is planned for future releases. Rest assured,
+    when implemented, actions like sending emails will require explicit user
+    permission. View our [roadmap](/essentials/roadmap) for development updates.
+  </AccordionContent>
+</AccordionItem>
+
+{" "}
+
+<AccordionItem value="loop-limits">
+  <AccordionTrigger>My agent keeps running out of loops!</AccordionTrigger>
+  <AccordionContent>
+    Loop limits exist due to API usage constraints and infrastructure costs. To
+    work around this: - Host Allinix locally with your own API key - Upgrade to
+    our pro plan for increased limits See our [setup
+    documentation](/essentials/roadmap) for more details.
+  </AccordionContent>
+</AccordionItem>
+
+{" "}
+
+<AccordionItem value="resume-run">
+  <AccordionTrigger>
+    My Agent stopped unexpectedly. Can I resume from where it left off?
+  </AccordionTrigger>
+  <AccordionContent>
+    Currently, each Agent run is independent and cannot be resumed. You can
+    start a new run using information from the previous session. Session
+    persistence is planned for future releases - check our
+    [roadmap](/essentials/roadmap).
+  </AccordionContent>
+</AccordionItem>
+
+{" "}
+
+<AccordionItem value="gpt4-access">
+  <AccordionTrigger>Can Allinix use GPT-4?</AccordionTrigger>
+  <AccordionContent>
+    GPT-4 access varies by user type: - Free tier: Uses GPT-3.5 - PRO users:
+    Have GPT-4 access - Self-hosted: Can use GPT-4 with your own API key
+  </AccordionContent>
+</AccordionItem>
+
+  <AccordionItem value="output-length">
+    <AccordionTrigger>
+      Why does the output keep getting cut off?
+    </AccordionTrigger>
+    <AccordionContent>
+      Output length is limited to manage generation costs. You can increase the limit by:
+      - Using your own API key and adjusting token count in advanced settings
+      - Upgrading to Pro tier
+      - Running Allinix locally
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+## General Questions
+
+<Accordion type="single" collapsible className="w-full">
+  <AccordionItem value="chatgpt-comparison">
+    <AccordionTrigger>
+      How is Allinix different from ChatGPT?
+    </AccordionTrigger>
+    <AccordionContent>
+      While ChatGPT focuses on conversation and specific questions, Allinix is a platform for configuring AI agents to achieve broader goals autonomously.
+    </AccordionContent>
+  </AccordionItem>
+
+{" "}
+
+<AccordionItem value="autogpt-comparison">
+  <AccordionTrigger>How is Allinix different from AutoGPT?</AccordionTrigger>
+  <AccordionContent>
+    Both are autonomous AI agent projects, but they differ in deployment: -
+    AutoGPT: Runs locally - Allinix: Web-based platform with additional features
+  </AccordionContent>
+</AccordionItem>
+
+{" "}
+
+<AccordionItem value="capabilities">
+  <AccordionTrigger>What can Allinix do?</AccordionTrigger>
+  <AccordionContent>
+    Allinix has extensive capabilities that are constantly expanding. Visit our
+    [usecases](/essentials/usecases) page to explore practical applications and
+    examples.
+  </AccordionContent>
+</AccordionItem>
+
+  <AccordionItem value="internet-access">
+    <AccordionTrigger>
+      Can Allinix access the internet?
+    </AccordionTrigger>
+    <AccordionContent>
+      Yes, Allinix has internet access capabilities.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+## Local Setup & Contribution
+
+<Accordion type="single" collapsible className="w-full">
+  <AccordionItem value="setup-issues">
+    <AccordionTrigger>
+      I'm experiencing issues setting up Allinix locally!
+    </AccordionTrigger>
+    <AccordionContent>
+      For installation help: 1. Check our detailed [setup
+      guide](/development/setup) 2. If problems persist, submit an [issue on
+      GitHub](https://github.com/allinix/Allinix/issues) 3. Join our Discord
+      community for real-time support
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>
+
+<Callout type="warning" className="mt-6">
+  Remember to check the [roadmap](/essentials/roadmap) regularly for updates on
+  new features and capabilities.
+</Callout>

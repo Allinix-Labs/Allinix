@@ -1,0 +1,116 @@
+---
+title: Setup
+description: Guidelines for setting up a local installation of Allinix
+icon: "gear"
+---
+
+import { Steps } from "@/components/ui/steps";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+import { Card } from "@/components/ui/card";
+
+# Local Installation Guide
+
+<Callout type="info">
+  We strongly recommend using Docker for installation as it provides a
+  consistent environment and handles dependencies automatically.
+</Callout>
+
+## Prerequisites
+
+<Card>
+  <div className="p-6">
+    <h3 className="font-semibold mb-4">Required Tools</h3>
+
+    <Steps>
+      1. Install [Git](https://git-scm.com/downloads) - Version control system -
+      Required for cloning the repository 2. Install
+      [Node.js](https://nodejs.org/en/download) - JavaScript runtime - LTS
+      version recommended 3. Get an [OpenAI API
+      key](https://beta.openai.com/signup/) - Required for AI functionality -
+      Sign up at OpenAI's platform 4. Install [VS
+      Code](https://code.visualstudio.com/download) (recommended) - Or any
+      preferred code editor
+    </Steps>
+
+  </div>
+</Card>
+
+### Docker Setup
+
+<Steps>
+  1. Download [Docker Desktop](https://www.docker.com/products/docker-desktop)
+  2. Create a Docker account if needed 3. Install Docker Desktop 4. Sign in to
+  Docker Desktop
+</Steps>
+
+## Installation Options
+
+<Tabs defaultValue="docker">
+  <TabsList>
+    <TabsTrigger value="docker">Docker Installation</TabsTrigger>
+    <TabsTrigger value="manual">Manual Installation</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="docker">
+    ### Docker Installation Steps
+    <Steps>
+      1. Open your code editor 2. Access the terminal ```bash # Windows: Ctrl +
+      ~ # Mac: Command + ~ ``` 3. Clone and setup repository
+      <Tabs defaultValue="mac">
+        <TabsList>
+          <TabsTrigger value="mac">Mac/Linux</TabsTrigger>
+          <TabsTrigger value="windows">Windows</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="mac">
+          ```bash git clone https://github.com/allinix/Allinix.git cd Allinix
+          ./setup.sh ```
+        </TabsContent>
+
+        <TabsContent value="windows">
+          ```bash git clone https://github.com/allinix/Allinix.git cd Allinix
+          ./setup.bat ```
+        </TabsContent>
+      </Tabs>
+      4. Configure API keys as prompted 5. Visit
+      [http://localhost:3000](http://localhost:3000)
+    </Steps>
+
+  </TabsContent>
+
+  <TabsContent value="manual">
+    ### Manual Installation Steps
+    <Callout type="warning">
+      Manual installation requires additional configuration and may be more
+      complex.
+    </Callout>
+    1. Configure Environment Variables ```bash # Use setup.sh for guided ENV
+    configuration ./setup.sh ``` 2. Setup Frontend ```bash cd ./next npm install
+    npm run dev ``` 3. Setup Backend (in a new terminal) ```bash cd ./platform
+    poetry install poetry run python -m allinix_platform ```
+  </TabsContent>
+</Tabs>
+
+## Accessing the Application
+
+Once installation is complete, open your browser and navigate to:
+
+```
+http://localhost:3000
+```
+
+<Card className="mt-6">
+  <div className="p-6">
+    ### Need Help? If you encounter any issues: 1. Follow our detailed [legacy
+    installation
+    guide](https://snapdragon-writer-867.notion.site/How-to-Install-Allinix-Locally-9b96b2314c9b491397976249fd121023)
+    2. Create an [issue on GitHub](https://github.com/allinix/Allinix/issues) 3.
+    Join our [Discord community](https://discord.gg/jdSBAnmdnY)
+  </div>
+</Card>
+
+<Callout type="info">
+  Our community is always ready to help! Don't hesitate to reach out if you need
+  assistance.
+</Callout>

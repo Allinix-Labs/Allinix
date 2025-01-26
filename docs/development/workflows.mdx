@@ -1,0 +1,190 @@
+---
+title: "Workflows"
+description: The workflow automation system within Allinix
+icon: "wave-sine"
+---
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+import { Card } from "@/components/ui/card";
+
+# Workflow Automation
+
+<Callout type="info">
+  AI-powered workflow automation is a core feature of Allinix. This guide covers
+  the key concepts and implementation details of our workflow system.
+</Callout>
+
+## Architecture Overview
+
+<Tabs defaultValue="frontend">
+  <TabsList>
+    <TabsTrigger value="frontend">Frontend Models</TabsTrigger>
+    <TabsTrigger value="backend">Backend Models</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="frontend">
+    ### Frontend Structure
+    
+    ```mermaid
+    graph TD
+      A[Workflow] --> B[Node 1]
+      A --> C[Node 2]
+      B --> D[Node 3]
+      C --> D
+      B --Edge--> C
+    ```
+    
+    <Card className="mt-4">
+      <div className="p-6 space-y-4">
+        #### Key Components
+        
+        1. **Workflow**
+           - Represents the entire graph structure
+           - Contains all nodes and their connections
+        
+        2. **Node**
+           - Individual element within a workflow
+           - Has position and visual properties
+           - Maps to a backend Block
+        
+        3. **Edge**
+           - Connects two nodes
+           - Defines workflow execution path
+      </div>
+    </Card>
+  </TabsContent>
+  
+  <TabsContent value="backend">
+    ### Backend Structure
+    
+    <Card>
+      <div className="p-6">
+        #### Block System
+        ```typescript
+        interface Block {
+          type: string;
+          description: string;
+          inputs: Record<string, any>;
+          outputs: Record<string, any>;
+          run(): Promise<void>;
+        }
+        ```
+        
+        - Each frontend Node maps to a Block
+        - Blocks contain actual execution logic
+        - Example: SlackMessageBlock handles Slack message sending
+      </div>
+    </Card>
+  </TabsContent>
+</Tabs>
+
+## Adding New Blocks
+
+<Tabs defaultValue="frontend-setup">
+  <TabsList>
+    <TabsTrigger value="frontend-setup">Frontend Setup</TabsTrigger>
+    <TabsTrigger value="backend-setup">Backend Setup</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="frontend-setup">
+    ### Frontend Configuration
+    
+    ```typescript title="next/src/services/workflow/node-block-definitions.ts"
+    export const blockDefinitions = {
+      // Add your block definition here
+      MyNewBlock: {
+        type: 'MyNewBlock',
+        inputs: {
+          // Define input fields
+        },
+        outputs: {
+          // Define output fields
+        }
+      }
+    };
+    ```
+    
+    <Callout type="info">
+      Block definitions will soon be served from the backend, eliminating the need for frontend updates.
+    </Callout>
+  </TabsContent>
+  
+  <TabsContent value="backend-setup">
+    ### Backend Implementation
+    
+    <Steps>
+      1. Create Block Definition
+         ```python title="platform/allinix_platform/schemas/workflow/blocks/my_block.py"
+         class MyBlockInput:
+             field1: str
+             field2: int
+         
+         class MyBlockOutput:
+             result: str
+         
+         class MyBlock:
+             type = "MyBlock"
+             description = "Performs specific action"
+             image_url = "block-icon.png"
+             input = MyBlockInput
+             
+             async def run(self) -> MyBlockOutput:
+                 # Implementation
+                 pass
+         ```
+      
+      2. Install Dependencies
+         ```bash
+         poetry add required-package
+         ```
+      
+      3. Register Block
+         ```python title="platform/allinix_platform/web/api/workflow/blocks/web/__init__.py"
+         from .my_block import MyBlock
+         
+         def get_block_runner(block_type: str):
+             if block_type == "MyBlock":
+                 return MyBlock()
+         ```
+      
+      4. Rebuild Services
+         ```bash
+         docker compose down
+         docker compose up --build
+         ```
+    </Steps>
+  </TabsContent>
+</Tabs>
+
+## Node Categories
+
+<Card className="mt-6">
+  <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="space-y-2">
+      <h3 className="font-semibold">Triggers</h3>
+      <p>Entry points that initiate workflow execution</p>
+      <ul className="list-disc pl-6">
+        <li>Schedule-based triggers</li>
+        <li>Event-based triggers</li>
+        <li>Manual triggers</li>
+      </ul>
+    </div>
+
+    <div className="space-y-2">
+      <h3 className="font-semibold">Actions</h3>
+      <p>Perform specific tasks within the workflow</p>
+      <ul className="list-disc pl-6">
+        <li>Data processing</li>
+        <li>External service integration</li>
+        <li>Custom business logic</li>
+      </ul>
+    </div>
+
+  </div>
+</Card>
+
+<Callout type="warning" className="mt-6">
+  Always test new blocks thoroughly in a development environment before
+  deploying to production.
+</Callout>

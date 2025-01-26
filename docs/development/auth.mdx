@@ -1,0 +1,103 @@
+---
+title: Authentication
+description: A comprehensive guide to authentication in Allinix
+icon: "lock"
+---
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+
+# Development Authentication
+
+When developing your Allinix application locally, you can use a simplified authentication system. This streamlines testing and debugging but should never be used in production environments.
+
+<Callout type="warning">
+  The development authentication mode is not secure and should only be used for
+  local testing.
+</Callout>
+
+To configure authentication:
+
+1. Set `NODE_ENV="development"` in your `.env` file to enable development mode
+2. Set `NEXTAUTH_SECRET` to any value (e.g., "development-secret") for local testing
+
+# OAuth Provider Setup
+
+<Tabs defaultValue="google">
+  <TabsList>
+    <TabsTrigger value="google">Google</TabsTrigger>
+    <TabsTrigger value="github">GitHub</TabsTrigger>
+    <TabsTrigger value="discord">Discord</TabsTrigger>
+  </TabsList>
+
+{" "}
+
+<TabsContent value="google">
+  ### Google Authentication Setup 1. Navigate to the [Google Cloud
+  Console](https://console.cloud.google.com) 2. Create a new project 3. Go to
+  "Credentials" → "Create Credentials" → "OAuth client ID" 4. Set up the OAuth
+  consent screen 5. Copy the generated client ID and secret 6. Add to `.env`:
+  ```env GOOGLE_CLIENT_ID="your_client_id"
+  GOOGLE_CLIENT_SECRET="your_client_secret" ``` For detailed setup instructions,
+  visit Google's [OAuth 2.0 setup
+  guide](https://developers.google.com/identity/protocols/oauth2).
+</TabsContent>
+
+{" "}
+
+<TabsContent value="github">
+  ### GitHub Authentication Setup 1. Open [GitHub
+  Settings](https://github.com/settings) → Developer Settings 2. Select "OAuth
+  Apps" → "New OAuth App" 3. Configure your application settings 4. Copy the
+  client ID and generated secret 5. Add to `.env`: ```env
+  GITHUB_CLIENT_ID="your_client_id" GITHUB_CLIENT_SECRET="your_client_secret"
+  ``` For detailed setup instructions, visit GitHub's [OAuth Apps
+  documentation](https://docs.github.com/en/developers/apps/building-oauth-apps).
+</TabsContent>
+
+  <TabsContent value="discord">
+    ### Discord Authentication Setup 1. Visit the [Discord Developer
+    Portal](https://discord.com/developers/applications) 2. Create a new
+    application 3. Configure OAuth2 settings and add redirect URIs 4. Copy the
+    application ID and secret 5. Add to `.env`: ```env
+    DISCORD_CLIENT_ID="your_client_id"
+    DISCORD_CLIENT_SECRET="your_client_secret" ``` For detailed setup
+    instructions, visit the [Discord OAuth2
+    documentation](https://discord.com/developers/docs/topics/oauth2).
+  </TabsContent>
+</Tabs>
+
+# Production Configuration
+
+When deploying to production, follow these essential steps:
+
+<Callout type="info">
+  Ensure all credentials and secrets are properly secured and never committed to
+  version control.
+</Callout>
+
+1. Generate a strong, random value for `NEXTAUTH_SECRET`
+2. Set `NEXTAUTH_URL` to your production domain (cannot be localhost)
+3. Ensure all OAuth provider credentials are properly configured
+4. Set `NODE_ENV="production"`
+
+Example production `.env` configuration:
+
+```env
+NODE_ENV="production"
+NEXTAUTH_URL="https://your-domain.com"
+NEXTAUTH_SECRET="your-secure-secret-key"
+
+# OAuth Provider Credentials
+GOOGLE_CLIENT_ID="..."
+GOOGLE_CLIENT_SECRET="..."
+GITHUB_CLIENT_ID="..."
+GITHUB_CLIENT_SECRET="..."
+DISCORD_CLIENT_ID="..."
+DISCORD_CLIENT_SECRET="..."
+```
+
+<Callout type="warning">
+  Never commit your `.env` file to version control. Use environment variables in
+  your deployment platform to manage sensitive credentials.
+</Callout>

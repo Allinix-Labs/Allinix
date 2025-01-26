@@ -1,0 +1,124 @@
+---
+title: Prompts
+description: Learn how we use prompts to guide the behavior of our AI agents
+icon: "page"
+---
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+import { Card } from "@/components/ui/card";
+
+# Prompting in Allinix
+
+Prompts are the foundation of how we communicate with and guide our AI agents. The efficiency and effectiveness of our agents heavily depend on how well we structure these prompts.
+
+<Callout type="info">
+  We primarily use two models in Allinix: - GPT-3.5-turbo - GPT-4 Both models
+  are highly sensitive to prompt nuances, making proper prompt engineering
+  crucial.
+</Callout>
+
+## Prompt Templates
+
+<Card>
+  <div className="p-6">
+    <h3 className="font-semibold mb-2">Using Templates</h3>
+    <p>
+      Allinix provides pre-made prompt templates to help you get started
+      quickly. While these templates offer excellent starting points, remember:
+    </p>
+    <ul className="list-disc pl-6 mt-2">
+      <li>Templates should be customized for your specific use case</li>
+      <li>Iterative testing and refinement often yield the best results</li>
+      <li>No single template fits all scenarios</li>
+    </ul>
+  </div>
+</Card>
+
+## Learning Resources
+
+<Card className="mt-6">
+  <div className="p-6">
+    ### Recommended Resources for Prompt Engineering 1. [Learn
+    Prompting](https://learnprompting.org/) - Comprehensive guide to prompt
+    engineering - Practical examples and techniques 2. [Prompt Engineering
+    Guide](https://www.promptingguide.ai/techniques/consistency) - Advanced
+    prompting techniques - Consistency optimization strategies 3. [Prompt
+    Engineering for
+    Developers](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
+    - Developer-focused approach - Hands-on tutorials and exercises
+  </div>
+</Card>
+
+## Core Concepts
+
+<Tabs defaultValue="shot-prompting">
+  <TabsList>
+    <TabsTrigger value="shot-prompting">Shot Prompting</TabsTrigger>
+    <TabsTrigger value="techniques">Advanced Techniques</TabsTrigger>
+  </TabsList>
+
+  <TabsContent value="shot-prompting">
+    ### Shot Prompting Explained
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <Card className="p-4">
+        <h4 className="font-semibold">Zero-Shot</h4>
+        <p>Direct prompting without examples</p>
+        ```plaintext Analyze this code for security vulnerabilities: [code here]
+        ```
+      </Card>
+
+      <Card className="p-4">
+        <h4 className="font-semibold">One-Shot</h4>
+        <p>Includes one example before the task</p>
+        ```plaintext Example: Input: Check password Output: Length >= 8, special
+        char required Now check: Validate email ```
+      </Card>
+
+      <Card className="p-4">
+        <h4 className="font-semibold">Few-Shot</h4>
+        <p>Multiple examples for complex patterns</p>
+      </Card>
+    </div>
+
+  </TabsContent>
+
+  <TabsContent value="techniques">
+    ### Advanced Prompting Techniques #### Plan and Solve (PS) ```mermaid graph
+    TD A[Problem Input] --> B[Understanding] B --> C[Variable Extraction] C -->
+    D[Step-by-Step Plan] D --> E[Solution Execution] ```
+    <Callout type="info">
+      Plan and Solve enhances chain-of-thought prompting by breaking down
+      complex problems into manageable steps. Learn more in the
+      [Plan-and-Solve-Prompting
+      repository](https://github.com/AGI-Edgerunners/Plan-and-Solve-Prompting).
+    </Callout>
+    #### ReAct (Reasoning + Action)
+    <Card className="p-4 mt-4">
+      <h4 className="font-semibold">ReAct Framework</h4>
+      <p>
+        Combines reasoning and action generation to create more coherent
+        responses:
+      </p>
+      <ul className="list-disc pl-6">
+        <li>Thought: Analyzes the current situation</li>
+        <li>Action: Determines the next step</li>
+        <li>Observation: Processes the result</li>
+        <li>Response: Generates the final output</li>
+      </ul>
+    </Card>
+  </TabsContent>
+</Tabs>
+
+## Best Practices
+
+<Card>
+  <div className="p-6 space-y-4">
+    ### Tips for Effective Prompting 1. **Be Specific** - Clearly define
+    expected output format - Include relevant context - Set explicit constraints
+    2. **Iterate and Refine** - Test prompts with various inputs - Document
+    successful patterns - Learn from unsuccessful attempts 3. **Consider
+    Context** - Account for model limitations - Balance detail vs. conciseness -
+    Maintain consistency across prompts
+  </div>
+</Card>

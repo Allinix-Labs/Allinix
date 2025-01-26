@@ -1,0 +1,158 @@
+---
+title: "Translations"
+description: Guide to translating the language
+icon: "globe"
+---
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Callout } from "@/components/ui/callout";
+import { Card } from "@/components/ui/card";
+import { Steps } from "@/components/ui/steps";
+
+# Translation Guide
+
+<Callout type="info">
+  Allinix supports multiple languages thanks to our community contributors like
+  @Cs4K1Sr4C. We welcome improvements and additions to our translations!
+</Callout>
+
+## Frontend Translation
+
+<Card>
+  <div className="p-6">
+    We use i18next for managing frontend translations. Our translation files are organized by language in the following structure:
+
+    ```bash title="next/public/locales"
+    > en
+    > fr
+    > hu
+    ...
+    > zh
+    ```
+
+    Each component's translations are namespaced. For example, the ChatWindow component uses the `chat` namespace.
+
+  </div>
+</Card>
+
+### Translation Structure
+
+<Tabs defaultValue="example">
+  <TabsList>
+    <TabsTrigger value="example">Example</TabsTrigger>
+    <TabsTrigger value="structure">File Structure</TabsTrigger>
+  </TabsList>
+  
+  <TabsContent value="example">
+    Sample translations from `chat.json`:
+    ```json
+    {
+      "EMBARKING_ON_NEW_GOAL": {
+        "en": "Embarking on a new goal:",
+        "es": "Embarcándose en un nuevo objetivo:"
+      }
+    }
+    ```
+  </TabsContent>
+  
+  <TabsContent value="structure">
+    ```plaintext
+    next/public/locales/
+    ├── en/
+    │   ├── chat.json
+    │   ├── common.json
+    │   └── settings.json
+    ├── fr/
+    │   ├── chat.json
+    │   ├── common.json
+    │   └── settings.json
+    └── ...
+    ```
+  </TabsContent>
+</Tabs>
+
+### Adding a New Language
+
+<Steps>
+  1. Update i18n Configuration
+     ```javascript title="next/next-i18next.config.js"
+     i18n: {
+       defaultLocale: "en",
+       locales: [
+         "en",
+         "hu",
+         // Add your language code here
+       ],
+     }
+     ```
+
+2. Add Language Definition
+
+   ```typescript title="next/src/utils/languages.ts"
+   export const availableLanguages: Language[] = [
+     ENGLISH,
+     { code: "fr", name: "Français", flag: "🇫🇷" },
+     // Add your language here
+   ];
+   ```
+
+3. Create Translation Files
+   ```bash
+   mkdir next/public/locales/[language-code]
+   # Add translations for all namespaces
+   ```
+
+  <Callout type="warning">
+    Server restart may be required for new languages to take effect.
+  </Callout>
+</Steps>
+
+## Backend Translation
+
+<Card>
+  <div className="p-6">
+    <h3 className="font-semibold mb-2">Model-Based Translation</h3>
+    <p>Backend translations are handled dynamically by the AI model:</p>
+    <ul className="list-disc pl-6 mt-2">
+      <li>
+        Translations are generated on-the-fly based on user language selection
+      </li>
+      <li>New frontend languages are automatically supported</li>
+      <li>Limited ability to modify model-generated translations</li>
+    </ul>
+  </div>
+</Card>
+
+## README Translation
+
+<Steps>
+  1. Create Translation File
+     ```bash
+     # In main/docs directory
+     touch README.[language-code].md
+     # Example: README.zh-HANS.md
+     ```
+
+2. Add Language Badge
+   `markdown
+      <a href="https://github.com/allinix/Allinix/blob/master/README.[language-code].md">
+      <img src="https://img.shields.io/badge/lang-[Language]-blue.svg" alt="[Language]" />
+     </a>
+  `
+   </Steps>
+
+## Documentation Translation
+
+<Callout type="info">
+  Our documentation system is currently in an experimental phase. Translation
+  support for documentation is planned for future releases.
+</Callout>
+
+<Card className="mt-6">
+  <div className="p-6">
+    ### Contributing to Translations If you notice missing or incorrect
+    translations: 1. Submit a GitHub issue 2. Create a pull request with your
+    changes 3. Join our community discussions We appreciate all contributions to
+    making Allinix more accessible globally!
+  </div>
+</Card>
