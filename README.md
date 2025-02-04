@@ -18,7 +18,7 @@
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
 <a href="https://docs.allinix.ai/">📚 Documentation</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://app.gitbook.com/o/Q6Fibd1Sslskr6T9ZfoA/s/f6w2FNe8GezEBdAUnMkb/essentials/contributing-to-allinix">🤝 Contribute</a>
+<a href="https://docs.allinix.ai/essentials/contributing-to-allinix">🤝 Contribute</a>
 </p>
 
 Allinix empowers you to create and manage autonomous AI agents directly in your browser. Name your AI agent, define its objectives, and watch as it develops strategies, executes tasks, and learns from outcomes to achieve your goals 🎯.
