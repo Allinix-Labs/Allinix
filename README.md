@@ -16,9 +16,9 @@
 <p align="center">
 <a href="https://allinix.ai">🔗 Website</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://nisafi11.gitbook.io/allinix">📚 Documentation</a>
+<a href="https://docs.allinix.ai/">📚 Documentation</a>
 <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
-<a href="https://nisafi11.gitbook.io/allinix/essentials/contributing-to-allinix">🤝 Contribute</a>
+<a href="https://app.gitbook.com/o/Q6Fibd1Sslskr6T9ZfoA/s/f6w2FNe8GezEBdAUnMkb/essentials/contributing-to-allinix">🤝 Contribute</a>
 </p>
 
 Allinix empowers you to create and manage autonomous AI agents directly in your browser. Name your AI agent, define its objectives, and watch as it develops strategies, executes tasks, and learns from outcomes to achieve your goals 🎯.
@@ -97,11 +97,11 @@ Before installation, ensure you have:
 
 ## 🎉 Roadmap
 
-Allinix is in active development. Check our [roadmap](https://nisafi11.gitbook.io/allinix/essentials/project-roadmap) for upcoming features and join our community to contribute to its evolution.
+Allinix is in active development. Check our [roadmap](https://docs.allinix.ai/essentials/project-roadmap) for upcoming features and join our community to contribute to its evolution.
 
 ## 🤝 Contributing
 
-We welcome contributions! See our [contributing guide](https://nisafi11.gitbook.io/allinix/essentials/contributing-to-allinix) to get started.
+We welcome contributions! See our [contributing guide](https://docs.allinix.ai/essentials/contributing-to-allinix) to get started.
 
 <p align="center">
 Thank you to all our contributors who make Allinix possible!
